@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SanskritiSafar - Explore Indian Heritage</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS */
+        :root {
+            --primary-color: #4a6b3a;
+            --secondary-color: #f8b400;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--dark-color) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-name {
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            margin: 0 10px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #home {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(home.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--secondary-color);
+            border: none;
+            color: var(--dark-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #e0a800;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            padding: 10px 28px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-weight: 700;
+            color: var(--dark-color);
+            font-size: 2.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 20px auto;
+        }
+
+        /* Destinations */
+
+        #featuredCarousel img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+
+        }
+
+        .destination-card {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .destination-card .card-body {
+            padding: 20px;
+        }
+
+        .destination-card .card-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Modal */
+        .modal-thumbnails {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .modal-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .modal-thumbnail:hover,
+        .modal-thumbnail.active {
+            border-color: var(--secondary-color);
+        }
+
+        /* About */
+        #about {
+            background-color: #f8f9fa;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .about-img:hover {
+            transform: scale(1.02);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .about-content {
+            padding-left: 30px;
+        }
+
+        /* Book Now */
+        #book {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .booking-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: var(--secondary-color);
+        }
+
+        /* Blog */
+        .blog-card {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card .card-body {
+            padding: 20px;
+        }
+
+        .blog-card .card-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 50px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .video-thumbnail:hover .play-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Contact */
+        .contact-info-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info-card i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-links h5 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .about-content {
+                padding-left: 0;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <span class="brand-name">SanskritiSafar</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destinations">Destinations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#book">Book Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="d-flex align-items-center">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover India's Rich Heritage</h1>
+                <p class="hero-subtitle">Experience the cultural diversity and historical wonders of India with our
+                    curated travel experiences</p>
+                <div class="hero-buttons">
+                    <a href="#destinations" class="btn btn-primary-custom">Explore Destinations</a>
+                    <a href="#book" class="btn btn-outline-custom">Book Your Trip</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+            </div>
+
+            <!-- Featured Destinations Carousel -->
+            <div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0"
+                        class="active"></button>
+                    <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="2"></button>
+                </div>
+                <div class="carousel-inner rounded">
+                    <div class="carousel-item active">
+                        <img src="varanasi1.jpg" class="d-block w-100" alt="Taj Mahal">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Taj Mahal, Agra</h5>
+                            <p>The epitome of love and Mughal architecture</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="home.jpg" class="d-block w-100" alt="Jaipur">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Hawa Mahal, Jaipur</h5>
+                            <p>The iconic Palace of Winds in the Pink City</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="varanasi2.jpg" class="d-block w-100" alt="Kerala">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Backwaters, Kerala</h5>
+                            <p>Serene waterways amidst lush greenery</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+            <!-- Destinations Grid -->
+            <div class="row">
+                <!-- Destination 1 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="1">
+                        <img src="varanasi1.jpg" alt="Taj Mahal">
+                        <div class="card-body">
+                            <h5 class="card-title">Varanasi</h5>
+                            <p class="card-text">Agra, Uttar Pradesh</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 2 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="2">
+                        <img src="Ramji1.jpg" alt="Hawa Mahal">
+                        <div class="card-body">
+                            <h5 class="card-title">Ram Mandir</h5>
+                            <p class="card-text">Jaipur, Rajasthan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 3 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="3">
+                        <img src="Gyaji1.jpeg" alt="Kerala Backwaters">
+                        <div class="card-body">
+                            <h5 class="card-title">Gya Dham</h5>
+                            <p class="card-text">Alleppey, Kerala</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 3.5 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="3">
+                        <img src="Kashi vishwanath1.jpeg" alt="Kerala Backwaters">
+                        <div class="card-body">
+                            <h5 class="card-title">Kashi Vishwanath Mandir</h5>
+                            <p class="card-text">Alleppey, Kerala</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 4 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="4">
+                        <img src="Pragraj1.jpeg" alt="Varanasi">
+                        <div class="card-body">
+                            <h5 class="card-title">Prayagraj</h5>
+                            <p class="card-text">Varanasi, Uttar Pradesh</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 5 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="5">
+                        <img src="Chardham1.jpeg" alt="Golden Temple">
+                        <div class="card-body">
+                            <h5 class="card-title">Char Dham</h5>
+                            <p class="card-text">Amritsar, Punjab</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 6 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="6">
+                        <img src="Pasupati Nath1.jpeg" alt="Goa Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Pasupati Nath</h5>
+                            <p class="card-text">Goa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 7 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="7">
+                        <img src="12jyotilinga.jpg" alt="Khajuraho">
+                        <div class="card-body">
+                            <h5 class="card-title">12 Jyotilinga</h5>
+                            <p class="card-text">Khajuraho, Madhya Pradesh</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 8 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="8">
+                        <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Mysore Palace">
+                        <div class="card-body">
+                            <h5 class="card-title">Vrindavan</h5>
+                            <p class="card-text">Mysuru, Karnataka</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination 9 -->
+                <div class="col-md-4">
+                    <div class="destination-card" data-bs-toggle="modal" data-bs-target="#destinationModal" data-id="9">
+                        <img src="https://images.unsplash.com/photo-1556388155-9d5d5333f0d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Ajanta Caves">
+                        <div class="card-body">
+                            <h5 class="card-title">Mathura</h5>
+                            <p class="card-text">Aurangabad, Maharashtra</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Destination Modal -->
+    <div class="modal fade" id="destinationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationModalTitle">Destination Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img id="modalMainImage" src="" class="img-fluid rounded" alt="Destination">
+                            <div class="modal-thumbnails mt-3">
+                                <img src="varanasi.jpg" class="modal-thumbnail active" alt="Thumbnail 1">
+                                <img src="https://images.unsplash.com/photo-1582972236019-ea9dfa7c15b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                    class="modal-thumbnail" alt="Thumbnail 2">
+                                <img src="https://images.unsplash.com/photo-1524303204177-6af1f5e6b0e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                    class="modal-thumbnail" alt="Thumbnail 3">
+                                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                    class="modal-thumbnail" alt="Thumbnail 4">
+                                <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                    class="modal-thumbnail" alt="Thumbnail 5">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 id="modalDestinationName">Destination Name</h4>
+                            <p id="modalDestinationLocation" class="text-muted">Location</p>
+                            <hr>
+                            <p id="modalDestinationDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor
+                                neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><strong>Best Time to Visit:</strong> <span
+                                        id="modalBestTime">October to March</span></li>
+                                <li class="list-group-item"><strong>Entry Fee:</strong> <span id="modalEntryFee">₹50 for
+                                        Indians</span></li>
+                                <li class="list-group-item"><strong>Famous For:</strong> <span
+                                        id="modalFamousFor">Architecture, History</span></li>
+                            </ul>
+                            <a href="#book" class="btn btn-primary-custom w-100" data-bs-dismiss="modal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About SanskritiSafar</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-img" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="About SanskritiSafar">
+                    </div>
+                </div>
+                <div class="col-lg-6 about-content">
+                    <h3>Discover India With Us</h3>
+                    <p>SanskritiSafar is a premier travel company specializing in cultural and heritage tours across
+                        India. Founded in 2010, we have been helping travelers experience the rich diversity of Indian
+                        culture, history, and traditions.</p>
+                    <p>Our mission is to provide authentic, immersive travel experiences that go beyond typical tourist
+                        attractions. We work with local communities to create sustainable tourism opportunities that
+                        benefit both travelers and residents.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-award fa-2x text-primary me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">Award Winning</h5>
+                                    <p class="mb-0">Best Cultural Tour Operator 2022</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-users fa-2x text-primary me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">10,000+ Travelers</h5>
+                                    <p class="mb-0">Happy customers since 2010</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-map-marked-alt fa-2x text-primary me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">50+ Destinations</h5>
+                                    <p class="mb-0">Across India</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-hand-holding-heart fa-2x text-primary me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">Sustainable</h5>
+                                    <p class="mb-0">Eco-friendly tours</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Our Journey</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="aboutMainImage"
+                        src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        class="img-fluid rounded" alt="About SanskritiSafar">
+                    <div class="modal-thumbnails mt-3">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            class="modal-thumbnail active" alt="Thumbnail 1">
+                        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            class="modal-thumbnail" alt="Thumbnail 2">
+                        <img src="https://images.unsplash.com/photo-1582972236019-ea9dfa7c15b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            class="modal-thumbnail" alt="Thumbnail 3">
+                        <img src="https://images.unsplash.com/photo-1524303204177-6af1f5e6b0e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            class="modal-thumbnail" alt="Thumbnail 4">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            class="modal-thumbnail" alt="Thumbnail 5">
+                    </div>
+                    <div class="mt-3">
+                        <p>SanskritiSafar was founded by a group of travel enthusiasts who wanted to showcase India's
+                            cultural heritage in an authentic way. What started as a small operation with just three
+                            destinations has now grown into one of India's leading cultural tour operators.</p>
+                        <p>We pride ourselves on our knowledgeable guides, carefully curated itineraries, and commitment
+                            to responsible tourism. Our team includes historians, anthropologists, and local experts who
+                            ensure every tour is both educational and enjoyable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Now Section -->
+    <section id="book" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book Your Trip</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="booking-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="country" class="form-label">Country</label>
+                                    <select class="form-select" id="country" required>
+                                        <option value="" selected disabled>Select Country</option>
+                                        <option value="India">India</option>
+                                        <option value="USA">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="destination" class="form-label">Destination</label>
+                                    <select class="form-select" id="destination" required>
+                                        <option value="" selected disabled>Select Destination</option>
+                                        <option value="Taj Mahal">Taj Mahal, Agra</option>
+                                        <option value="Jaipur">Jaipur, Rajasthan</option>
+                                        <option value="Kerala">Kerala Backwaters</option>
+                                        <option value="Varanasi">Varanasi Ghats</option>
+                                        <option value="Golden Temple">Golden Temple, Amritsar</option>
+                                        <option value="Goa">Goa Beaches</option>
+                                        <option value="Khajuraho">Khajuraho Temples</option>
+                                        <option value="Mysore">Mysore Palace</option>
+                                        <option value="Ajanta">Ajanta Caves</option>
+                                        <option value="Darjeeling">Darjeeling Tea Gardens</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="tourType" class="form-label">Tour Type</label>
+                                    <select class="form-select" id="tourType" required>
+                                        <option value="" selected disabled>Select Tour Type</option>
+                                        <option value="Cultural">Cultural Tour</option>
+                                        <option value="Heritage">Heritage Walk</option>
+                                        <option value="Food">Food Tour</option>
+                                        <option value="Photography">Photography Tour</option>
+                                        <option value="Custom">Custom Tour</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="startDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="endDate" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="endDate" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="adults" class="form-label">Adults</label>
+                                    <input type="number" class="form-control" id="adults" min="1" value="1" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="children" class="form-label">Children (under 12)</label>
+                                    <input type="number" class="form-control" id="children" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="specialRequests" class="form-label">Special Requests</label>
+                                <textarea class="form-control" id="specialRequests" rows="3"></textarea>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    I agree to the terms and conditions
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary-custom w-100">Submit Booking</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Travel Blog</h2>
+            </div>
+            <div class="row">
+                <!-- Blog Post 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="dQw4w9WgXcQ">
+                            <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Taj Mahal at Sunrise</h5>
+                            <p class="card-text">Experience the magic of Taj Mahal as the first rays of sun illuminate
+                                this wonder of the world.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>June 15, 2023</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="9bZkp7q19f0">
+                            <img src="https://i.ytimg.com/vi/9bZkp7q19f0/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jaipur's Hidden Gems</h5>
+                            <p class="card-text">Discover the lesser-known but equally fascinating sites in the Pink
+                                City of Jaipur.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>May 28, 2023</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="JGwWNGJdvx8">
+                            <img src="https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Kerala Backwaters</h5>
+                            <p class="card-text">A serene journey through the palm-fringed canals of Kerala on a
+                                traditional houseboat.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>April 10, 2023</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="kJQP7kiw5Fk">
+                            <img src="https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Varanasi Ganga Aarti</h5>
+                            <p class="card-text">The mesmerizing evening ritual on the banks of the Ganges in Varanasi.
+                            </p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>March 22, 2023</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="nYh-n7EOtMA">
+                            <img src="https://i.ytimg.com/vi/nYh-n7EOtMA/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Golden Temple Langar</h5>
+                            <p class="card-text">Experience the world's largest free kitchen serving 100,000 meals
+                                daily.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>February 15,
+                                    2023</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="OPf0YbXqDm0">
+                            <img src="https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Goan Portuguese Heritage</h5>
+                            <p class="card-text">Exploring the unique blend of Indian and Portuguese cultures in Goa's
+                                architecture and food.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>January 30,
+                                    2023</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 7 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="RgKAFK5djSk">
+                            <img src="https://i.ytimg.com/vi/RgKAFK5djSk/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Khajuraho Sculptures</h5>
+                            <p class="card-text">Decoding the intricate carvings and symbolism of Khajuraho's ancient
+                                temples.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>December 12,
+                                    2022</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 8 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="JGwWNGJdvx8">
+                            <img src="https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mysore Dasara Festival</h5>
+                            <p class="card-text">The grand 10-day festival celebrating victory of good over evil in
+                                royal style.</p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>November 5,
+                                    2022</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 9 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="kJQP7kiw5Fk">
+                            <img src="https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Ajanta Cave Paintings</h5>
+                            <p class="card-text">The ancient Buddhist masterpieces hidden in the caves of Maharashtra.
+                            </p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>October 18,
+                                    2022</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 10 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <div class="video-thumbnail" data-bs-toggle="modal" data-bs-target="#videoModal"
+                            data-video-id="nYh-n7EOtMA">
+                            <img src="https://i.ytimg.com/vi/nYh-n7EOtMA/hqdefault.jpg" alt="Video Thumbnail">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Darjeeling Tea Process</h5>
+                            <p class="card-text">From leaf to cup - how the world's finest tea is grown and processed.
+                            </p>
+                            <p class="text-muted"><small><i class="far fa-calendar-alt me-2"></i>September 3,
+                                    2022</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalTitle">Video Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="videoFrame" src="" allowfullscreen></iframe>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-8">
+                            <h4 id="videoTitle">Video Title</h4>
+                            <p id="videoDescription">Video description goes here. Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat
+                                molestie vehicula.</p>
+                            <p class="text-muted" id="videoDate"><small><i class="far fa-calendar-alt me-2"></i>June 15,
+                                    2023</small></p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Related Videos</h5>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="dQw4w9WgXcQ">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Taj Mahal at Sunrise</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="9bZkp7q19f0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/9bZkp7q19f0/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Jaipur's Hidden Gems</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="JGwWNGJdvx8">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Kerala Backwaters</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="kJQP7kiw5Fk">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Varanasi Ganga Aarti</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="nYh-n7EOtMA">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/nYh-n7EOtMA/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Golden Temple Langar</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="OPf0YbXqDm0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Goan Portuguese Heritage</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="RgKAFK5djSk">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/RgKAFK5djSk/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Khajuraho Sculptures</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action related-video"
+                                    data-video-id="JGwWNGJdvx8">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg" width="80"
+                                            class="me-3">
+                                        <span>Mysore Dasara Festival</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Address</h4>
+                        <p>123 Heritage Lane<br>New Delhi, 110001<br>India</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-info-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h4>Phone</h4>
+                        <p>+91 98765 43210<br>+91 11 2345 6789</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>info@sanskritisafar.com<br>bookings@sanskritisafar.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="map-container mb-4">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.566628571315!2d77.2098653150824!3d28.63264498242466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5a8a5e5a5b%3A0x6a8a5a5a5a5a5a5!2sIndia%20Gate!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-form bg-white p-4 rounded shadow">
+                        <h4 class="mb-4">Send Us a Message</h4>
+                        <form>
+                            <div class="mb-3">
+                                <label for="contactName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="contactName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="contactEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactSubject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="contactSubject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactMessage" class="form-label">Message</label>
+                                <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary-custom">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="brand-name">SanskritiSafar</h3>
+                    <p>Discover India's rich cultural heritage with our curated travel experiences. We offer authentic,
+                        immersive tours that showcase the diversity of Indian traditions, history, and landscapes.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#book">Book Now</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Popular Destinations</h5>
+                    <ul>
+                        <li><a href="#">Taj Mahal, Agra</a></li>
+                        <li><a href="#">Jaipur, Rajasthan</a></li>
+                        <li><a href="#">Kerala Backwaters</a></li>
+                        <li><a href="#">Varanasi Ghats</a></li>
+                        <li><a href="#">Golden Temple</a></li>
+                        <li><a href="#">Goa Beaches</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to our newsletter for travel tips, special offers, and updates.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <button class="btn btn-primary-custom" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2023 SanskritiSafar. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">
+                        <a href="#" class="text-white me-3">Privacy Policy</a>
+                        <a href="#" class="text-white me-3">Terms of Service</a>
+                        <a href="#" class="text-white">FAQ</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Destination modal functionality
+        const destinationModal = document.getElementById('destinationModal');
+        if (destinationModal) {
+            destinationModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const destinationId = button.getAttribute('data-id');
+
+                // In a real application, you would fetch this data from an API or database
+                // Here we're just using placeholder data
+                const destinations = {
+                    '1': {
+                        name: 'Taj Mahal',
+                        location: 'Agra, Uttar Pradesh',
+                        description: 'The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal; it also houses the tomb of Shah Jahan himself.',
+                        bestTime: 'October to March',
+                        entryFee: '₹50 for Indians, ₹1100 for foreigners',
+                        famousFor: 'Mughal architecture, Symbol of love'
+                    },
+                    '2': {
+                        name: 'Hawa Mahal',
+                        location: 'Jaipur, Rajasthan',
+                        description: 'The Hawa Mahal is a palace in Jaipur, India. Made with the red and pink sandstone, the palace sits on the edge of the City Palace, Jaipur, and extends to the Zenana, or women\'s chambers.',
+                        bestTime: 'November to February',
+                        entryFee: '₹50 for Indians, ₹200 for foreigners',
+                        famousFor: 'Unique architecture, Palace of Winds'
+                    },
+                    '3': {
+                        name: 'Kerala Backwaters',
+                        location: 'Alleppey, Kerala',
+                        description: 'The Kerala backwaters are a network of brackish lagoons and lakes lying parallel to the Arabian Sea coast of Kerala state in southern India. The backwaters were formed by the action of waves and shore currents creating low barrier islands across the mouths of the many rivers flowing down from the Western Ghats range.',
+                        bestTime: 'September to March',
+                        entryFee: 'Varies by houseboat',
+                        famousFor: 'Scenic beauty, Houseboat stays'
+                    },
+                    // Add data for other destinations similarly
+                };
+
+                const destination = destinations[destinationId] || destinations['1'];
+
+                document.getElementById('modalDestinationName').textContent = destination.name;
+                document.getElementById('modalDestinationLocation').textContent = destination.location;
+                document.getElementById('modalDestinationDescription').textContent = destination.description;
+                document.getElementById('modalBestTime').textContent = destination.bestTime;
+                document.getElementById('modalEntryFee').textContent = destination.entryFee;
+                document.getElementById('modalFamousFor').textContent = destination.famousFor;
+                document.getElementById('modalMainImage').src = button.querySelector('img').src;
+            });
+        }
+
+        // Thumbnail click functionality for destination modal
+        document.querySelectorAll('.modal-thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function () {
+                document.querySelectorAll('.modal-thumbnail').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('modalMainImage').src = this.src;
+            });
+        });
+
+        // Video modal functionality
+        const videoModal = document.getElementById('videoModal');
+        if (videoModal) {
+            videoModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const videoId = button.getAttribute('data-video-id');
+                const videoFrame = document.getElementById('videoFrame');
+
+                // Set the video source
+                videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+                // In a real application, you would fetch this data from an API or database
+                // Here we're just using placeholder data
+                const videos = {
+                    'dQw4w9WgXcQ': {
+                        title: 'Taj Mahal at Sunrise',
+                        description: 'Experience the magic of Taj Mahal as the first rays of sun illuminate this wonder of the world. Our guide explains the history and architecture of this iconic monument.',
+                        date: 'June 15, 2023'
+                    },
+                    '9bZkp7q19f0': {
+                        title: 'Jaipur\'s Hidden Gems',
+                        description: 'Discover the lesser-known but equally fascinating sites in the Pink City of Jaipur, from stepwells to havelis that most tourists miss.',
+                        date: 'May 28, 2023'
+                    },
+                    'JGwWNGJdvx8': {
+                        title: 'Kerala Backwaters',
+                        description: 'A serene journey through the palm-fringed canals of Kerala on a traditional houseboat, with stops at local villages and spice plantations.',
+                        date: 'April 10, 2023'
+                    },
+                    // Add data for other videos similarly
+                };
+
+                const video = videos[videoId] || videos['dQw4w9WgXcQ'];
+
+                document.getElementById('videoTitle').textContent = video.title;
+                document.getElementById('videoDescription').textContent = video.description;
+                document.getElementById('videoDate').innerHTML = `<small><i class="far fa-calendar-alt me-2"></i>${video.date}</small>`;
+            });
+
+            videoModal.addEventListener('hidden.bs.modal', function () {
+                // Pause the video when modal is closed
+                document.getElementById('videoFrame').src = '';
+            });
+        }
+
+        // Related video click functionality
+        document.querySelectorAll('.related-video').forEach(video => {
+            video.addEventListener('click', function (e) {
+                e.preventDefault();
+                const videoId = this.getAttribute('data-video-id');
+                const videoFrame = document.getElementById('videoFrame');
+                videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+                // Update video info (in a real app, you'd fetch this data)
+                const videoTitle = this.querySelector('span').textContent;
+                document.getElementById('videoTitle').textContent = videoTitle;
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
